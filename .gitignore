@@ -1,0 +1,47 @@
+# ──────────────────────────────
+# Neovim / AstroNvim キャッシュ
+# ──────────────────────────────
+
+# Lazy.nvim (プラグインマネージャ)
+# プラグインはインストールされるが、都度自動再構築されるため不要
+lazy-lock.json
+plugin/
+lua/user/plugins/compiled.lua
+
+# Mason (LSP・Formatterなどの管理)
+.mason/
+mason/
+
+# Treesitter のビルドキャッシュ
+parser/
+nvim-treesitter/
+
+# Neovim のキャッシュ・スワップ・履歴ファイル
+.cache/
+swap/
+undo/
+shada/
+session/
+backup/
+
+# 一時ファイル・ログ
+*.log
+*.tmp
+*~
+
+# OS・エディタ関連
+.DS_Store
+Thumbs.db
+
+# ──────────────────────────────
+# 個人環境依存
+# ──────────────────────────────
+
+# local config（マシンごとの設定）
+lua/user/local.lua
+lua/user/local/*.lua
+
+# 一時的な実験用ファイル
+test.lua
+sandbox.lua
+
