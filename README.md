@@ -2,6 +2,13 @@
 
 `git clone https://github.com/KinuGra/astronvim-config.git ~/.config/nvim`
 
+# 注意事項
+
+AstroNvim v5 は Lazy.nvim ベースで、設定は lua/plugins/\*.lua に書く。
+lua/user/init.lua は使われない。
+各設定ファイルは return { ... } でプラグイン定義を返す形式。
+（例：toggleterm の on_open に vim.keymap.set() を追加して jj でノーマルモード復帰）
+
 # AstroNvim Template
 
 **NOTE:** This is for AstroNvim v5+
