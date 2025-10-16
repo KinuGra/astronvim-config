@@ -1,3 +1,7 @@
+# 使い方
+
+`git clone https://github.com/KinuGra/astronvim-config.git ~/.config/nvim`
+
 # AstroNvim Template
 
 **NOTE:** This is for AstroNvim v5+
