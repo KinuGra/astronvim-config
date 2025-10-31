@@ -4,8 +4,9 @@ return {
     "akinsho/toggleterm.nvim",
     opts = {
       on_open = function(term)
-        -- ターミナル内で"jj"を押すとノーマルモードに戻る
+        -- ターミナル内で"jj, jk"を押すとノーマルモードに戻る
         vim.keymap.set("t", "jj", "<cmd>stopinsert<CR>", { buffer = term.bufnr, noremap = true, silent = true })
+        vim.keymap.set("t", "jk", "<cmd>stopinsert<CR>", { buffer = term.bufnr, noremap = true, silent = true })
       end,
     },
   },
