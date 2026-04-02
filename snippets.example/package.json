@@ -1,0 +1,10 @@
+{
+	"contributes": {
+		"snippets": [
+			{ "language": ["cpp", "c"], "path": "./cpp.json" },
+			{ "language": ["c"], "path": "./c.json" },
+			{ "language": ["go"], "path": "./go.json" },
+			{ "language": ["python"], "path": "./python.json" }
+		]
+	}
+}

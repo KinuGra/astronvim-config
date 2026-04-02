@@ -1,6 +1,16 @@
 --@type LazySpec
 return {
   {
+    "L3MON4D3/LuaSnip",
+    config = function(plugin, opts)
+      require("astronvim.plugins.configs.luasnip")(plugin, opts)
+      local snippets_dir = vim.fn.stdpath("config") .. "/snippets"
+      if vim.fn.isdirectory(snippets_dir) == 1 then
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = { snippets_dir } })
+      end
+    end,
+  },
+  {
     "akinsho/toggleterm.nvim",
     opts = {
       on_open = function(term)
