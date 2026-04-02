@@ -1,0 +1,17 @@
+{
+	"AtCoder C Template": {
+		"prefix": "kyopro",
+		"description": "AtCoder C template",
+		"body": [
+			"#include <stdio.h>",
+			"#include <stdlib.h>",
+			"#include <string.h>",
+			"#include <math.h>",
+			"",
+			"int main(void) {",
+			"\t$1",
+			"\treturn 0;",
+			"}"
+		]
+	}
+}

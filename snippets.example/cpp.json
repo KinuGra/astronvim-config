@@ -1,0 +1,26 @@
+{
+	"AtCoder C++ Template": {
+		"prefix": "kyopro",
+		"description": "AtCoder C++ template",
+		"body": [
+			"#include <iostream>",
+			"#include <vector>",
+			"#include <string>",
+			"#include <algorithm>",
+			"#include <numeric>",
+			"#include <map>",
+			"#include <set>",
+			"#include <queue>",
+			"#include <cmath>",
+			"",
+			"using ll = long long;",
+			"",
+			"int main() {",
+			"\tstd::ios_base::sync_with_stdio(false);",
+			"\tstd::cin.tie(nullptr);",
+			"\t$1",
+			"\treturn 0;",
+			"}"
+		]
+	}
+}

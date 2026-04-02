@@ -1,0 +1,25 @@
+{
+	"AtCoder Go Template": {
+		"prefix": "kyopro",
+		"description": "AtCoder Go template",
+		"body": [
+			"package main",
+			"",
+			"import (",
+			"\t\"bufio\"",
+			"\t\"fmt\"",
+			"\t\"os\"",
+			")",
+			"",
+			"var reader *bufio.Reader",
+			"var writer *bufio.Writer",
+			"",
+			"func main() {",
+			"\treader = bufio.NewReader(os.Stdin)",
+			"\twriter = bufio.NewWriter(os.Stdout)",
+			"\tdefer writer.Flush()",
+			"\t$1",
+			"}"
+		]
+	}
+}
