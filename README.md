@@ -37,6 +37,29 @@ nvim
     └── custom-features.md   # カスタム機能詳細
 ```
 
+## スニペット（オプション）
+
+`~/.config/nvim/snippets/` に VSCode 形式のスニペットを置くと自動で読み込まれます。
+ディレクトリが存在しない場合はスキップされます（エラーなし）。
+
+このディレクトリは `.gitignore` に含まれているため、各自で作成してください。
+`snippets.example/` にサンプルがあるのでそのままコピーして使えます。
+
+```shell
+cp -r ~/.config/nvim/snippets.example ~/.config/nvim/snippets
+```
+
+### サンプル内容
+
+| ファイル | 言語 | prefix |
+|---|---|---|
+| `cpp.json` | C++ | `kyopro` |
+| `c.json` | C | `kyopro` |
+| `go.json` | Go | `kyopro` |
+| `python.json` | Python | `kyopro` |
+
+`.cpp` / `.c` / `.go` / `.py` ファイルを開いて Insert モードで `kyopro` と入力すると展開されます。
+
 ## 注意事項
 
 - AstroNvim v5 は Lazy.nvim ベースで、設定は `lua/plugins/*.lua` に書く
