@@ -1,69 +1,59 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
--- Configuration documentation can be found with `:h astrocore`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
+-- ============================================================================
+-- astrocore.lua — AstroNvim コア設定
+-- ============================================================================
+-- AstroNvim のマッピング、Vim オプション、autocommand 等を一元管理するファイル。
+-- ドキュメント: `:h astrocore`
+-- Lua LSP を入れると補完が効く: `:LspInstall lua_ls`
+--
+-- ■ AstroNvim 標準トグル（このファイルでの定義は不要）
+--   <Leader>uw  行折り返し (wrap)          <Leader>un  行番号 (number)
+--   <Leader>ur  相対行番号 (relativenumber) <Leader>us  スペルチェック
+--   <Leader>uf  フォーマットオンセーブ(buf) <Leader>uF  フォーマットオンセーブ(global)
+--   <Leader>uh  URL ハイライト
+--   → <Space>u で which-key メニューに全項目表示
+-- ============================================================================
 
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
-    -- Configure core features of AstroNvim
+
+    -- ========================================================================
+    -- features: AstroNvim コア機能の ON/OFF
+    -- ========================================================================
     features = {
-      large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
-      autopairs = true, -- enable autopairs at start
-      cmp = true, -- enable completion at start
-      diagnostics = { virtual_text = true, virtual_lines = false }, -- diagnostic settings on startup
-      highlighturl = true, -- highlight URLs at start
-      notifications = true, -- enable notifications at start
+      large_buf = { size = 1024 * 256, lines = 10000 }, -- treesitter 等を無効化する閾値
+      autopairs = true, -- 自動カッコ閉じ
+      cmp = true, -- 補完 (nvim-cmp)
+      diagnostics = { virtual_text = true, virtual_lines = false },
+      highlighturl = true, -- URL ハイライト
+      notifications = true, -- 通知 (snacks.nvim)
     },
-    -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
+
+    -- ========================================================================
+    -- diagnostics: vim.diagnostics.config() に渡す設定
+    -- ========================================================================
     diagnostics = {
       virtual_text = true,
       underline = true,
     },
-    -- passed to `vim.filetype.add`
-    filetypes = {
-      -- see `:h vim.filetype.add` for usage
-      extension = {
-        foo = "fooscript",
-      },
-      filename = {
-        [".foorc"] = "fooscript",
-      },
-      pattern = {
-        [".*/etc/foo/.*"] = "fooscript",
-      },
-    },
-    -- vim options can be configured here
-    options = {
-      opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
-        wrap = false, -- sets vim.opt.wrap
-      },
-      g = { -- vim.g.<key>
-        -- configure global vim variables (vim.g)
-        -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
-        -- This can be found in the `lua/lazy_setup.lua` file
-      },
-    },
-    -- Mappings can be configured through AstroCore as well.
-    -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
-    mappings = {
-      -- first key is the mode
-      n = {
-        -- second key is the lefthand side of the map
 
-        -- navigate buffer tabs
+    -- ========================================================================
+    -- mappings: キーマッピング
+    -- ========================================================================
+    -- 【数字プレフィックス】
+    --   vim.v.count1 を使ったマッピングはキー入力前に数字で倍率指定できる。
+    --   例: 5<Leader>wj → 下方向に 5×2=10 行分リサイズ
+    mappings = {
+      n = {
+
+        -- ==== Buffer navigation ====
+        -- ]b / [b : 次/前のバッファ（数字対応: 3]b → 3つ先）
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
-        -- mappings seen under group name "Buffer"
+        -- <Leader>bd : タブラインからバッファを選んで閉じる
         ["<Leader>bd"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
@@ -73,12 +63,29 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        -- ["<Leader>b"] = { desc = "Buffers" },
-
-        -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
+        -- ==== Split resize（数字プレフィックス対応） ====
+        -- macOS では Ctrl+矢印 が Mission Control に取られるため、
+        -- <Leader>w + hjkl でリサイズする。
+        --   <Leader>wj        → 下に 2 行分
+        --   5<Leader>wj       → 下に 10 行分（5 × 2）
+        --   <Leader>w=        → 全スプリット均等化
+        ["<Leader>wk"] = {
+          function() vim.cmd("resize +" .. (vim.v.count1 * 2)) end,
+          desc = "Resize split up",
+        },
+        ["<Leader>wj"] = {
+          function() vim.cmd("resize -" .. (vim.v.count1 * 2)) end,
+          desc = "Resize split down",
+        },
+        ["<Leader>wh"] = {
+          function() vim.cmd("vertical resize -" .. (vim.v.count1 * 2)) end,
+          desc = "Resize split left",
+        },
+        ["<Leader>wl"] = {
+          function() vim.cmd("vertical resize +" .. (vim.v.count1 * 2)) end,
+          desc = "Resize split right",
+        },
+        ["<Leader>w="] = { "<C-w>=", desc = "Equalize split sizes" },
       },
     },
   },
