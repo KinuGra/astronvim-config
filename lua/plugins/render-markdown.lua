@@ -6,7 +6,7 @@ return {
   },
   ft = { "markdown" },
   keys = {
-    { "<Space>sm", ":RenderMarkdown toggle<CR>", desc = "Toggle Render Markdown" },
+    { "<Space>um", ":RenderMarkdown toggle<CR>", desc = "Toggle Render Markdown" },
   },
   opts = {
     render_modes = true,
