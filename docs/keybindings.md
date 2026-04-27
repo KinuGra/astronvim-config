@@ -56,7 +56,7 @@ macOS では `Ctrl+矢印` が Mission Control に取られるため、`<Leader>
 
 | キー | モード | 説明 |
 |---|---|---|
-| `<Leader>sm` | Normal | Markdown のリッチレンダリングをトグル |
+| `<Leader>um` | Normal | Markdown のリッチレンダリングをトグル |
 
 ---
 
